@@ -107,7 +107,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCors(corsBuilder => corsBuilder.AllowAnyOrigin());
-app.EnsureMigrationOfContext<IDbContextFactory<ApplicationContext>>();
+app.MigrateDatabase();
 app.UseMetricServer();
 app.UseHttpMetrics();
 

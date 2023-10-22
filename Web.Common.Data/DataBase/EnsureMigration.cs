@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Web.Common.Data.DataBase;
 
 public static class EnsureMigration
 {
-    public static void EnsureMigrationOfContext<T>(this IApplicationBuilder app) where T : IDbContextFactory<ApplicationContext>
+    public static IHost MigrateDatabase(this IHost host)
     {
-        var contextFactory = app.ApplicationServices.GetService<T>();
-        using var context = contextFactory.CreateDbContext();
-        context.Database.Migrate();
+        using (var scope = host.Services.CreateScope())
+        {
+            var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationContext>>();
+            using var context = factory.CreateDbContext();
+            context.Database.Migrate();
+        }
+
+        return host;
     }
 }

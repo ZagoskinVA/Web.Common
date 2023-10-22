@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Text.Json;
-using WebUtilities.Services;
 
 namespace Web.Common.Handlers;
 
@@ -34,7 +33,7 @@ public class ErrorsHandler
                     break;
             }
 
-            var result = JsonSerializer.Serialize(JsonService.GetErrorJson(null, new List<string>() { error.Message }));
+            var result = JsonSerializer.Serialize(error.Message);
             await response.WriteAsync(result);
         }
     }

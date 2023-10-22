@@ -29,6 +29,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Web.Common.Data\Web.Common.Data.csproj" />
       <ProjectReference Include="..\Web.Common.Entity\Web.Common.Entity.csproj" />
+      <ProjectReference Include="..\WebUtilities\WebUtilities.csproj" />
     </ItemGroup>
 
     <ItemGroup>
